@@ -29,6 +29,13 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3000/user/login', formData); // Make a POST request to the login endpoint
       console.log(response.data); // Log the response data
+       // Redirect the user after successful login
+
+       if (response.status === 200) {
+        console.log(response.data.token);
+        localStorage.setItem('token', response.data.token); // Store the token in local storage
+        navigate('/userList'); // Redirect to login page
+    }
     } catch (error) {
       console.error('Error logging in:', error); // Log any errors
     }
