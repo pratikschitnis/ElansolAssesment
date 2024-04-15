@@ -138,3 +138,15 @@ exports.userLogin = async (req, res) => {
 
 
 }
+
+exports.getUsers = async(req, res) => {
+    try {
+    
+        const users = await User.find(); // Retrieve all users from the database
+        res.status(200).json(users); // Send the retrieved users as JSON response    
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
