@@ -1,18 +1,36 @@
-require('dotenv').config()
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const connectionString = process.env.MONGODB_URI;
+const DATABASE_URL = process.env.MONGODB_URI;
 
-mongoose.connect(connectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+if (!DATABASE_URL) {
+  throw new Error(
+    "Please define the DATABASE_URL environment variable inside .env.local"
+  );
+}
 
-const db = mongoose.connection;
+let cachedConn = null;
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to the MongoDB database');
-});
+// Function to establish MongoDB connection
+async function connectDB() {
+  if (cachedConn) {
+    console.log("Connected by cache");
+    return cachedConn;
+  }
 
-module.exports = mongoose;
+  try {
+
+    const connection = await mongoose.connect(DATABASE_URL);
+    cachedConn = connection;
+    console.log("Connected to MongoDB");
+    return connection;
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    throw error;
+  }
+}
+
+module.exports = {
+  connectDB,
+  mongoose // You can still export mongoose if you need it elsewhere
+};

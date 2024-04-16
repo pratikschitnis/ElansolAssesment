@@ -4,10 +4,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
+const { connectDB } = require("../database/db-connection");
 
 exports.userRegistration = async (req, res) => {
 
+    await connectDB();
+
     const { name, email, password, dateOfBirth } = req.body;
+
+    console.log(name, email, password, dateOfBirth, req.body);
 
     // Define validation checks using express-validator
     const validationChecks = [
@@ -35,7 +40,7 @@ exports.userRegistration = async (req, res) => {
         });
         if (user) {
             return res.status(400).json({
-                msg: "User Already Exists"
+                message: "User Already Exists"
             });
         }
 
@@ -74,7 +79,7 @@ exports.userRegistration = async (req, res) => {
 
 
 
-        return res.status(200).json({ msg: 'User registered successfully' });
+        return res.status(200).json({ message: 'User registered successfully' });
     }
 
     catch (error) {
@@ -86,7 +91,10 @@ exports.userRegistration = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
 
+    await connectDB();
+
     const { email, password } = req.body;
+    console.log(email, password, req.body);
 
     // Define validation checks using express-validator
     const validationChecks = [
@@ -140,6 +148,9 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.getUsers = async(req, res) => {
+
+    await connectDB();
+
     try {
     
         const users = await User.find(); // Retrieve all users from the database

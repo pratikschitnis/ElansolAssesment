@@ -1,10 +1,10 @@
 .container{
-    display: flex;
+    display:flex;
     flex-direction: column;
     margin: auto;
     margin-top: 100px;
-    background: #fff;
-    padding-bottom: 30px;
+    background: #5e5b5b;
+    padding-bottom: 20px;
     width: 600px;
 }
 
@@ -14,24 +14,26 @@
     align-items: center;
     gap: 9px;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .text{
-    color: #3c009d;
+    color: #025342;
     font-size: 48px;
-    font-weight: 700;
+    font-weight: 600;
+    background: #02a380;
+    font-weight: 400;
+    padding: 20px;
 }
 
 .underline{
     width: 61px;
-    height: 6px;
-    background: #3c009d;
+    background: #01312b;
     border-radius: 9px;
 }
 
 .inputs{
-    margin-top: 55px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -43,7 +45,7 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: #eaeaea;
+    background: #272727;
     border-radius: 6px;
 }
 
@@ -69,7 +71,7 @@
 }
 
 .forgot-password span{
-    color: #4c00b4;
+    color: #058b6a;
     cursor: pointer;
 
 }
@@ -81,7 +83,7 @@
 }
 
 .forgot-password span{
-    color: #4c00b4;
+    color: #0ecc9d;
     cursor: pointer;
 
 }
@@ -94,7 +96,7 @@
 }
 
 .signup-button span{
-    color: #4c00b4;
+    color: #15b17d;
     cursor: pointer;
 
 }
@@ -112,10 +114,11 @@
     align-items: center;
     width: 520px;
     height: 59px;
-    color: #fff;
-    background: #4c00b4;
+    color: #033d27;
+    background: #017e63;
     border-radius: 50px;
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
+    border-radius: 20px;
 }

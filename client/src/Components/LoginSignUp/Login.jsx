@@ -26,20 +26,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
-      const response = await axios.post('http://localhost:3000/user/login', formData); // Make a POST request to the login endpoint
-      console.log(response.data); // Log the response data
-       // Redirect the user after successful login
+        const response = await axios.post('http://localhost:3000/user/login', formData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(response.status, response.data.msg);
 
-       if (response.status === 200) {
-        console.log(response.data.token);
-        localStorage.setItem('token', response.data.token); // Store the token in local storage
-        navigate('/userList'); // Redirect to login page
-    }
+        // Redirect the user after successful sign-up
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.token)
+            navigate('/userList'); // Redirect to login page
+        }
     } catch (error) {
-      console.error('Error logging in:', error); // Log any errors
+        alert(error.response.data.message)
+        console.error('Error login:', error);
     }
-  };
+};
+
 
   return (
     <div className='container'>

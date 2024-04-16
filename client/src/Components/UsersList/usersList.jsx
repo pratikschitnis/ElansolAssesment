@@ -3,6 +3,7 @@ import axios from "axios";
 import Logout from "../Logout";
 
 const UserList = () => {
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -11,6 +12,7 @@ const UserList = () => {
         const response = await axios.get("http://localhost:3000/user/getUsers");
         setUsers(response.data);
       } catch (error) {
+        alert(error.response.data.message)
         console.error("Error fetching users:", error);
       }
     };

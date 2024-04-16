@@ -3,7 +3,7 @@ import user_icon from '../../assets/person.png'
 import email_icon from '../../assets/email.png';
 import password_icon from '../../assets/password.png';
 import dob_icon from '../../assets/dob.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,6 +20,7 @@ const Signup = () => {
       dateOfBirth: '',
       email: '',
       password: '',
+      date: new Date()
   });
 
   const handleChange = (e) => {
@@ -39,11 +40,18 @@ const Signup = () => {
           // Redirect the user after successful sign-up
           if (response.status === 200) {
               navigate('/login'); // Redirect to login page
+          } else {
+            alert(response)
           }
       } catch (error) {
+        alert(error.response.data.message)
           console.error('Error signing up:', error);
       }
   };
+
+  useEffect(() => {
+    console.log(formData);
+  })
 
   return (
     <div className='container'>
